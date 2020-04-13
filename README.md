@@ -18,10 +18,10 @@ Intel Core i7-6700K CPU 4.00GHz (Skylake), 1 CPU, 8 logical and 4 physical cores
 
 
 ```
-|   Method |     Mean |   Error |  StdDev | Ratio |    Gen 0 |  Gen 1 | Gen 2 | Allocated |
-|--------- |---------:|--------:|--------:|------:|---------:|-------:|------:|----------:|
-| Original | 426.9 μs | 2.82 μs | 2.64 μs |  1.00 | 328.6133 | 1.4648 |     - | 1333.7 KB |
-| Modified | 182.3 μs | 3.65 μs | 4.61 μs |  0.42 | 146.2402 | 0.9766 |     - | 558.21 KB |
+|   Method |     Mean |   Error |  StdDev | Ratio |    Gen 0 |   Gen 1 | Gen 2 |  Allocated |
+|--------- |---------:|--------:|--------:|------:|---------:|--------:|------:|-----------:|
+| Original | 438.6 μs | 7.10 μs | 6.29 μs |  1.00 | 329.1016 | 23.4375 |     - | 1333.62 KB |
+| Modified | 178.0 μs | 3.53 μs | 5.06 μs |  0.41 | 146.7285 |  0.4883 |     - |  558.04 KB |
 
 Rendering:
 
@@ -35,10 +35,10 @@ Intel Core i7-6700K CPU 4.00GHz (Skylake), 1 CPU, 8 logical and 4 physical cores
 
 
 ```
-|   Method |     Mean |    Error |   StdDev |   Median | Ratio | RatioSD |       Gen 0 |      Gen 1 |    Gen 2 | Allocated |
-|--------- |---------:|---------:|---------:|---------:|------:|--------:|------------:|-----------:|---------:|----------:|
-| Original | 209.8 ms | 16.86 ms | 49.71 ms | 191.0 ms |  1.00 |    0.00 | 275250.0000 | 46000.0000 | 750.0000 | 1095.8 MB |
-| Modified | 121.1 ms |  4.47 ms | 13.18 ms | 120.5 ms |  0.59 |    0.08 | 217200.0000 |   200.0000 | 200.0000 | 865.71 MB |
+|   Method |      Mean |    Error |   StdDev | Ratio | RatioSD |       Gen 0 |      Gen 1 |     Gen 2 |  Allocated |
+|--------- |----------:|---------:|---------:|------:|--------:|------------:|-----------:|----------:|-----------:|
+| Original | 178.68 ms | 3.550 ms | 9.718 ms |  1.00 |    0.00 | 275000.0000 | 46000.0000 | 1000.0000 | 1095.79 MB |
+| Modified |  63.01 ms | 0.768 ms | 0.681 ms |  0.35 |    0.02 |   2555.5556 |   111.1111 |  111.1111 |    10.8 MB |
 
 Both seem to represent a nice improvement. However, there are likely more things to be explored:
 

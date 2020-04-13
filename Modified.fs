@@ -154,7 +154,7 @@ let inline spehreHit s r tMin tMax =
     let b = dot oc r.Dir
     let c = dot oc oc - s.Radius*s.Radius
     let discriminant = b*b - a*c
-    let f temp =
+    let inline f temp =
         if temp < tMax && temp > tMin then
             let hit =
                 { T = temp
@@ -175,7 +175,7 @@ let inline aabbHit aabb r tmin0 tmax0 =
         let invD = 1.0 / dir'
         let t0 = (min' - origin') * invD
         let t1 = (max' - origin') * invD
-        let (t0', t1') = if invD < 0.0 then (t1, t0) else (t0, t1)
+        let struct (t0', t1') = if invD < 0.0 then struct (t1, t0) else struct (t0, t1)
         let tmin'' = max t0' tmin'
         let tmax'' = min t1' tmax'
         struct (tmin'', tmax'')
@@ -287,7 +287,7 @@ type Image =
 
 let inline image2ppm img =
     let sb = StringBuilder()
-    let onPixel (struct(r,g,b)) =
+    let inline onPixel (struct(r,g,b)) =
         sb.Append(string r + " " +
                   string g + " " +
                   string b + "\n")
@@ -298,7 +298,7 @@ let inline image2ppm img =
     sb.ToString()
 
 let inline render objs width height cam =
-    let pixel l =
+    let inline pixel l =
         let i = l % width
         let j = height - l / width
         colorToPixel (traceRay objs width height cam j i)
@@ -317,9 +317,8 @@ type Scene =
       Spheres: Sphere [] }
 
 let inline fromScene width height scene =
-  struct (mkBvh sphereAABB scene.Spheres,
-           camera scene.LookFrom scene.LookAt { X=0.0; Y=1.0; Z=0.0 }
-             scene.FOV (float width/float height))
+    struct (mkBvh sphereAABB scene.Spheres,
+            camera scene.LookFrom scene.LookAt { X=0.0; Y=1.0; Z=0.0 } scene.FOV (float width/float height))
 
 let inline tabulate2D m n f =
     Array.collect (fun j -> Array.map (fun i -> f (j, i)) ([| 0 .. n-1 |])) ([| 0 .. m-1|])

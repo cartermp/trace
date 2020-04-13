@@ -171,25 +171,25 @@ let inline spehreHit s r tMin tMax =
         | ValueNone -> f ((-b + sqrt(b*b-a*c))/a)
 
 let inline aabbHit aabb r tmin0 tmax0 =
-    let iter min' max' origin' dir' tmin' tmax' =
+    let inline iter min' max' origin' dir' tmin' tmax' =
         let invD = 1.0 / dir'
         let t0 = (min' - origin') * invD
         let t1 = (max' - origin') * invD
         let (t0', t1') = if invD < 0.0 then (t1, t0) else (t0, t1)
         let tmin'' = max t0' tmin'
         let tmax'' = min t1' tmax'
-        (tmin'', tmax'')
-    let (tmin1, tmax1) =
+        struct (tmin'', tmax'')
+    let struct (tmin1, tmax1) =
         iter aabb.Min.X aabb.Max.X r.Origin.X r.Dir.X tmin0 tmax0
     if tmax1 <= tmin1 then
         false
     else
-        let (tmin2, tmax2) =
+        let struct (tmin2, tmax2) =
             iter aabb.Min.Y aabb.Max.Y r.Origin.Y r.Dir.Y tmin1 tmax1
         if tmax2 <= tmin2 then
             false
         else
-            let (tmin3, tmax3) =
+            let struct (tmin3, tmax3) =
                 iter aabb.Min.Z aabb.Max.Z r.Origin.Z r.Dir.Z tmin2 tmax2
             tmax3 > tmin3
 
